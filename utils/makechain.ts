@@ -1,6 +1,6 @@
-import { OpenAIChat } from 'langchain/llms';
-import { LLMChain, ChatVectorDBQAChain, loadQAChain } from 'langchain/chains';
-import { PineconeStore } from 'langchain/vectorstores';
+import { OpenAIChat } from 'langchain/llms/openai';
+import { LLMChain, ChatVectorDBQAChain, loadQAChain, ConversationalRetrievalQAChain } from 'langchain/chains';
+import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
@@ -13,7 +13,7 @@ Follow Up Input: {question}
 Standalone question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant summarizing articles from a newsletter. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided. 
+  `You are an AI assistant summarizing articles from a newsletter. You are given the following extracted parts of the newsletter and a question. Provide a conversational answer based on the context provided. 
 If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
 If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
 
